@@ -6,12 +6,10 @@ using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 
-namespace LearnOpenTK
-{
+namespace LearnOpenTK {
     // This project will explore how to use uniform variable type which allows you to assign values
     // to shaders at any point during the project.
-    public class Window : GameWindow
-    {
+    public class Window : GameWindow {
 
         private readonly float[] _vertices =
         {
@@ -32,12 +30,10 @@ namespace LearnOpenTK
         private Shader _shader;
 
         public Window(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings)
-            : base(gameWindowSettings, nativeWindowSettings)
-        {
+            : base(gameWindowSettings, nativeWindowSettings) {
         }
 
-        protected override void OnLoad()
-        {
+        protected override void OnLoad() {
             base.OnLoad();
 
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -64,8 +60,7 @@ namespace LearnOpenTK
             _timer.Start();
         }
 
-        protected override void OnRenderFrame(FrameEventArgs e)
-        {
+        protected override void OnRenderFrame(FrameEventArgs e) {
             base.OnRenderFrame(e);
 
             GL.Clear(ClearBufferMask.ColorBufferBit);
@@ -100,20 +95,17 @@ namespace LearnOpenTK
             SwapBuffers();
         }
 
-        protected override void OnUpdateFrame(FrameEventArgs e)
-        {
+        protected override void OnUpdateFrame(FrameEventArgs e) {
             base.OnUpdateFrame(e);
 
             var input = KeyboardState;
 
-            if (input.IsKeyDown(Keys.Escape))
-            {
+            if (input.IsKeyDown(Keys.Escape)) {
                 Close();
             }
         }
 
-        protected override void OnResize(ResizeEventArgs e)
-        {
+        protected override void OnResize(ResizeEventArgs e) {
             base.OnResize(e);
 
             GL.Viewport(0, 0, Size.X, Size.Y);

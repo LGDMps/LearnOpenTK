@@ -6,8 +6,7 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using OpenTK.Windowing.Desktop;
 
-namespace LearnOpenTK
-{
+namespace LearnOpenTK {
     // We now have a rotating rectangle but how can we make the view move based on the users input?
     // In this tutorial we will take a look at how you could implement a camera class
     // and start responding to user input.
@@ -17,8 +16,7 @@ namespace LearnOpenTK
     // In reality, we can't move the camera but we actually move the rectangle.
     // This will explained more in depth in the web version, however it pretty much gives us the same result
     // as if the view itself was moved.
-    public class Window : GameWindow
-    {
+    public class Window : GameWindow {
         private readonly float[] _vertices =
         {
             // Position         Texture coordinates
@@ -61,12 +59,10 @@ namespace LearnOpenTK
         private double _time;
 
         public Window(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings)
-            : base(gameWindowSettings, nativeWindowSettings)
-        {
+            : base(gameWindowSettings, nativeWindowSettings) {
         }
 
-        protected override void OnLoad()
-        {
+        protected override void OnLoad() {
             base.OnLoad();
 
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -112,8 +108,7 @@ namespace LearnOpenTK
             CursorGrabbed = true;
         }
 
-        protected override void OnRenderFrame(FrameEventArgs e)
-        {
+        protected override void OnRenderFrame(FrameEventArgs e) {
             base.OnRenderFrame(e);
 
             _time += 4.0 * e.Time;
@@ -136,8 +131,7 @@ namespace LearnOpenTK
             SwapBuffers();
         }
 
-        protected override void OnUpdateFrame(FrameEventArgs e)
-        {
+        protected override void OnUpdateFrame(FrameEventArgs e) {
             base.OnUpdateFrame(e);
 
             if (!IsFocused) // Check to see if the window is focused
@@ -147,37 +141,30 @@ namespace LearnOpenTK
 
             var input = KeyboardState;
 
-            if (input.IsKeyDown(Keys.Escape))
-            {
+            if (input.IsKeyDown(Keys.Escape)) {
                 Close();
             }
 
             const float cameraSpeed = 1.5f;
             const float sensitivity = 0.2f;
 
-            if (input.IsKeyDown(Keys.W))
-            {
+            if (input.IsKeyDown(Keys.W)) {
                 _camera.Position += _camera.Front * cameraSpeed * (float)e.Time; // Forward
             }
 
-            if (input.IsKeyDown(Keys.S))
-            {
+            if (input.IsKeyDown(Keys.S)) {
                 _camera.Position -= _camera.Front * cameraSpeed * (float)e.Time; // Backwards
             }
-            if (input.IsKeyDown(Keys.A))
-            {
+            if (input.IsKeyDown(Keys.A)) {
                 _camera.Position -= _camera.Right * cameraSpeed * (float)e.Time; // Left
             }
-            if (input.IsKeyDown(Keys.D))
-            {
+            if (input.IsKeyDown(Keys.D)) {
                 _camera.Position += _camera.Right * cameraSpeed * (float)e.Time; // Right
             }
-            if (input.IsKeyDown(Keys.Space))
-            {
+            if (input.IsKeyDown(Keys.Space)) {
                 _camera.Position += _camera.Up * cameraSpeed * (float)e.Time; // Up
             }
-            if (input.IsKeyDown(Keys.LeftShift))
-            {
+            if (input.IsKeyDown(Keys.LeftShift)) {
                 _camera.Position -= _camera.Up * cameraSpeed * (float)e.Time; // Down
             }
 
@@ -189,8 +176,7 @@ namespace LearnOpenTK
                 _lastPos = new Vector2(mouse.X, mouse.Y);
                 _firstMove = false;
             }
-            else
-            {
+            else {
                 // Calculate the offset of the mouse position
                 var deltaX = mouse.X - _lastPos.X;
                 var deltaY = mouse.Y - _lastPos.Y;
@@ -204,15 +190,13 @@ namespace LearnOpenTK
 
         // In the mouse wheel function, we manage all the zooming of the camera.
         // This is simply done by changing the FOV of the camera.
-        protected override void OnMouseWheel(MouseWheelEventArgs e)
-        {
+        protected override void OnMouseWheel(MouseWheelEventArgs e) {
             base.OnMouseWheel(e);
 
             _camera.Fov -= e.OffsetY;
         }
 
-        protected override void OnResize(ResizeEventArgs e)
-        {
+        protected override void OnResize(ResizeEventArgs e) {
             base.OnResize(e);
 
             GL.Viewport(0, 0, Size.X, Size.Y);

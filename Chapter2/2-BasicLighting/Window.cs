@@ -5,14 +5,12 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using OpenTK.Windowing.Desktop;
 
-namespace LearnOpenTK
-{
+namespace LearnOpenTK {
     // In this tutorial we set up some basic lighting and look at how the phong model works
     // For more insight into how it all works look at the web version. If you are just here for the source,
     // most of the changes are in the shaders, specifically most of the changes are in the fragment shader as this is
     // where the lighting calculations happens.
-    public class Window : GameWindow
-    {
+    public class Window : GameWindow {
         // Here we now have added the normals of the vertices
         // Remember to define the layouts to the VAO's
         private readonly float[] _vertices =
@@ -80,12 +78,10 @@ namespace LearnOpenTK
         private Vector2 _lastPos;
 
         public Window(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings)
-            : base(gameWindowSettings, nativeWindowSettings)
-        {
+            : base(gameWindowSettings, nativeWindowSettings) {
         }
 
-        protected override void OnLoad()
-        {
+        protected override void OnLoad() {
             base.OnLoad();
 
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -132,8 +128,7 @@ namespace LearnOpenTK
             CursorGrabbed = true;
         }
 
-        protected override void OnRenderFrame(FrameEventArgs e)
-        {
+        protected override void OnRenderFrame(FrameEventArgs e) {
             base.OnRenderFrame(e);
 
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
@@ -169,59 +164,48 @@ namespace LearnOpenTK
             SwapBuffers();
         }
 
-        protected override void OnUpdateFrame(FrameEventArgs e)
-        {
+        protected override void OnUpdateFrame(FrameEventArgs e) {
             base.OnUpdateFrame(e);
 
-            if (!IsFocused)
-            {
+            if (!IsFocused) {
                 return;
             }
 
             var input = KeyboardState;
 
-            if (input.IsKeyDown(Keys.Escape))
-            {
+            if (input.IsKeyDown(Keys.Escape)) {
                 Close();
             }
 
             const float cameraSpeed = 1.5f;
             const float sensitivity = 0.2f;
 
-            if (input.IsKeyDown(Keys.W))
-            {
+            if (input.IsKeyDown(Keys.W)) {
                 _camera.Position += _camera.Front * cameraSpeed * (float)e.Time; // Forward
             }
-            if (input.IsKeyDown(Keys.S))
-            {
+            if (input.IsKeyDown(Keys.S)) {
                 _camera.Position -= _camera.Front * cameraSpeed * (float)e.Time; // Backwards
             }
-            if (input.IsKeyDown(Keys.A))
-            {
+            if (input.IsKeyDown(Keys.A)) {
                 _camera.Position -= _camera.Right * cameraSpeed * (float)e.Time; // Left
             }
-            if (input.IsKeyDown(Keys.D))
-            {
+            if (input.IsKeyDown(Keys.D)) {
                 _camera.Position += _camera.Right * cameraSpeed * (float)e.Time; // Right
             }
-            if (input.IsKeyDown(Keys.Space))
-            {
+            if (input.IsKeyDown(Keys.Space)) {
                 _camera.Position += _camera.Up * cameraSpeed * (float)e.Time; // Up
             }
-            if (input.IsKeyDown(Keys.LeftShift))
-            {
+            if (input.IsKeyDown(Keys.LeftShift)) {
                 _camera.Position -= _camera.Up * cameraSpeed * (float)e.Time; // Down
             }
 
             var mouse = MouseState;
 
-            if (_firstMove)
-            {
+            if (_firstMove) {
                 _lastPos = new Vector2(mouse.X, mouse.Y);
                 _firstMove = false;
             }
-            else
-            {
+            else {
                 var deltaX = mouse.X - _lastPos.X;
                 var deltaY = mouse.Y - _lastPos.Y;
                 _lastPos = new Vector2(mouse.X, mouse.Y);
@@ -231,15 +215,13 @@ namespace LearnOpenTK
             }
         }
 
-        protected override void OnMouseWheel(MouseWheelEventArgs e)
-        {
+        protected override void OnMouseWheel(MouseWheelEventArgs e) {
             base.OnMouseWheel(e);
 
             _camera.Fov -= e.OffsetY;
         }
 
-        protected override void OnResize(ResizeEventArgs e)
-        {
+        protected override void OnResize(ResizeEventArgs e) {
             base.OnResize(e);
 
             GL.Viewport(0, 0, Size.X, Size.Y);

@@ -4,12 +4,10 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using OpenTK.Windowing.Desktop;
 
-namespace LearnOpenTK
-{
+namespace LearnOpenTK {
     // Be warned, there is a LOT of stuff here. It might seem complicated, but just take it slow and you'll be fine.
     // OpenGL's initial hurdle is quite large, but once you get past that, things will start making more sense.
-    public class Window : GameWindow
-    {
+    public class Window : GameWindow {
         // Create the vertices for our triangle. These are listed in normalized device coordinates (NDC)
         // In NDC, (0, 0) is the center of the screen.
         // Negative X coordinates move to the left, positive X move to the right.
@@ -37,13 +35,11 @@ namespace LearnOpenTK
         private Shader _shader;
 
         public Window(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings)
-            : base(gameWindowSettings, nativeWindowSettings)
-        {
+            : base(gameWindowSettings, nativeWindowSettings) {
         }
 
         // Now, we start initializing OpenGL.
-        protected override void OnLoad()
-        {
+        protected override void OnLoad() {
             base.OnLoad();
 
             // This will be the color of the background after we clear it, in normalized colors.
@@ -124,8 +120,7 @@ namespace LearnOpenTK
         }
 
         // Now that initialization is done, let's create our render loop.
-        protected override void OnRenderFrame(FrameEventArgs e)
-        {
+        protected override void OnRenderFrame(FrameEventArgs e) {
             base.OnRenderFrame(e);
 
             // This clears the image, using what you set as GL.ClearColor earlier.
@@ -164,20 +159,17 @@ namespace LearnOpenTK
             // And that's all you have to do for rendering! You should now see a yellow triangle on a black screen.
         }
 
-        protected override void OnUpdateFrame(FrameEventArgs e)
-        {
+        protected override void OnUpdateFrame(FrameEventArgs e) {
             base.OnUpdateFrame(e);
 
             var input = KeyboardState;
 
-            if (input.IsKeyDown(Keys.Escape))
-            {
+            if (input.IsKeyDown(Keys.Escape)) {
                 Close();
             }
         }
 
-        protected override void OnResize(ResizeEventArgs e)
-        {
+        protected override void OnResize(ResizeEventArgs e) {
             base.OnResize(e);
 
             // When the window gets resized, we have to call GL.Viewport to resize OpenGL's viewport to match the new size.
@@ -198,8 +190,7 @@ namespace LearnOpenTK
         // This would free up video ram (VRAM) that can be used for new textures.
         //
         // The comming chapters will not have this code.
-        protected override void OnUnload()
-        {
+        protected override void OnUnload() {
             // Unbind all the resources by binding the targets to 0/null.
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
             GL.BindVertexArray(0);

@@ -4,8 +4,7 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using OpenTK.Windowing.Desktop;
 
-namespace LearnOpenTK
-{
+namespace LearnOpenTK {
     // So you've drawn the first triangle. But what about drawing multiple?
     // You may consider just adding more vertices to the array, and that would technically work, but say you're drawing a rectangle.
     // It only needs four vertices, but since OpenGL works in triangles, you'd need to define 6.
@@ -14,8 +13,7 @@ namespace LearnOpenTK
 
     // OpenGL provides a way to reuse vertices, which can heavily reduce memory usage on complex objects.
     // This is called an Element Buffer Object. This tutorial will be all about how to set one up.
-    public class Window : GameWindow
-    {
+    public class Window : GameWindow {
         // We modify the vertex array to include four vertices for our rectangle.
         private readonly float[] _vertices =
         {
@@ -44,12 +42,10 @@ namespace LearnOpenTK
         private int _elementBufferObject;
 
         public Window(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings)
-            : base(gameWindowSettings, nativeWindowSettings)
-        {
+            : base(gameWindowSettings, nativeWindowSettings) {
         }
 
-        protected override void OnLoad()
-        {
+        protected override void OnLoad() {
             base.OnLoad();
 
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -80,8 +76,7 @@ namespace LearnOpenTK
             _shader.Use();
         }
 
-        protected override void OnRenderFrame(FrameEventArgs e)
-        {
+        protected override void OnRenderFrame(FrameEventArgs e) {
             base.OnRenderFrame(e);
 
             GL.Clear(ClearBufferMask.ColorBufferBit);
@@ -103,20 +98,17 @@ namespace LearnOpenTK
             SwapBuffers();
         }
 
-        protected override void OnUpdateFrame(FrameEventArgs e)
-        {
+        protected override void OnUpdateFrame(FrameEventArgs e) {
             base.OnUpdateFrame(e);
 
             var input = KeyboardState;
 
-            if (input.IsKeyDown(Keys.Escape))
-            {
+            if (input.IsKeyDown(Keys.Escape)) {
                 Close();
             }
         }
 
-        protected override void OnResize(ResizeEventArgs e)
-        {
+        protected override void OnResize(ResizeEventArgs e) {
             base.OnResize(e);
             GL.Viewport(0, 0, Size.X, Size.Y);
         }

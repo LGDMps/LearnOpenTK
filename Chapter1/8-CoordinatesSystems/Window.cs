@@ -5,13 +5,11 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using OpenTK.Windowing.Desktop;
 
-namespace LearnOpenTK
-{
+namespace LearnOpenTK {
     // We can now move around objects. However, how can we move our "camera", or modify our perspective?
     // In this tutorial, I'll show you how to setup a full projection/view/model (PVM) matrix.
     // In addition, we'll make the rectangle rotate over time.
-    public class Window : GameWindow
-    {
+    public class Window : GameWindow {
         private readonly float[] _vertices =
         {
             // Position         Texture coordinates
@@ -51,12 +49,10 @@ namespace LearnOpenTK
         private Matrix4 _projection;
 
         public Window(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings)
-            : base(gameWindowSettings, nativeWindowSettings)
-        {
+            : base(gameWindowSettings, nativeWindowSettings) {
         }
 
-        protected override void OnLoad()
-        {
+        protected override void OnLoad() {
             base.OnLoad();
 
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -107,13 +103,12 @@ namespace LearnOpenTK
             //   Aspect ratio. This should be set to Width / Height.
             //   Near-clipping. Any vertices closer to the camera than this value will be clipped.
             //   Far-clipping. Any vertices farther away from the camera than this value will be clipped.
-            _projection = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(45f), Size.X / (float) Size.Y, 0.1f, 100.0f);
+            _projection = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(45f), Size.X / (float)Size.Y, 0.1f, 100.0f);
 
             // Now, head over to OnRenderFrame to see how we setup the model matrix.
         }
 
-        protected override void OnRenderFrame(FrameEventArgs e)
-        {
+        protected override void OnRenderFrame(FrameEventArgs e) {
             base.OnRenderFrame(e);
 
             // We add the time elapsed since last frame, times 4.0 to speed up animation, to the total amount of time passed.
@@ -149,20 +144,17 @@ namespace LearnOpenTK
             SwapBuffers();
         }
 
-        protected override void OnUpdateFrame(FrameEventArgs e)
-        {
+        protected override void OnUpdateFrame(FrameEventArgs e) {
             base.OnUpdateFrame(e);
 
             var input = KeyboardState;
 
-            if (input.IsKeyDown(Keys.Escape))
-            {
+            if (input.IsKeyDown(Keys.Escape)) {
                 Close();
             }
         }
 
-        protected override void OnResize(ResizeEventArgs e)
-        {
+        protected override void OnResize(ResizeEventArgs e) {
             base.OnResize(e);
 
             GL.Viewport(0, 0, Size.X, Size.Y);

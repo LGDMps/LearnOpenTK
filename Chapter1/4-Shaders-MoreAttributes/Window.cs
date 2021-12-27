@@ -6,13 +6,11 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using System.Diagnostics;
 
-namespace LearnOpenTK
-{
+namespace LearnOpenTK {
     // In this project, we will be assigning 3 colors to the triangle, one for each vertex.
     // The output will be an interpolated value based on the distance from each vertex.
     // If you want to look more into it, the in-between step is called a Rasterizer.
-    public class Window : GameWindow
-    {
+    public class Window : GameWindow {
 
         // We're assigning three different colors at the asscoiate vertex position:
         // blue for the top, green for the bottom left and red for the bottom right.
@@ -31,13 +29,11 @@ namespace LearnOpenTK
         private Shader _shader;
 
         public Window(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings)
-            : base(gameWindowSettings, nativeWindowSettings)
-        {
+            : base(gameWindowSettings, nativeWindowSettings) {
         }
 
         // Now, we start initializing OpenGL.
-        protected override void OnLoad()
-        {
+        protected override void OnLoad() {
             base.OnLoad();
 
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -71,8 +67,7 @@ namespace LearnOpenTK
             _shader.Use();
         }
 
-        protected override void OnRenderFrame(FrameEventArgs e)
-        {
+        protected override void OnRenderFrame(FrameEventArgs e) {
             base.OnRenderFrame(e);
 
             GL.Clear(ClearBufferMask.ColorBufferBit);
@@ -86,20 +81,17 @@ namespace LearnOpenTK
             SwapBuffers();
         }
 
-        protected override void OnUpdateFrame(FrameEventArgs e)
-        {
+        protected override void OnUpdateFrame(FrameEventArgs e) {
             base.OnUpdateFrame(e);
 
             var input = KeyboardState;
 
-            if (input.IsKeyDown(Keys.Escape))
-            {
+            if (input.IsKeyDown(Keys.Escape)) {
                 Close();
             }
         }
 
-        protected override void OnResize(ResizeEventArgs e)
-        {
+        protected override void OnResize(ResizeEventArgs e) {
             base.OnResize(e);
 
             GL.Viewport(0, 0, Size.X, Size.Y);
